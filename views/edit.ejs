@@ -10,19 +10,17 @@
                 <form action="" method="POST">
                     <div class="form-group" style="font-weight: bolder;">
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                        <h2>Edit CD Info:</h2>
+                        <h2>Edit a Movie:</h2>
                         <label for="post_title">Title</label>
-                        <input type="text" name="title" class="form-control" placeholder="Enter title:"  value="<%= content.title %>" required>
-                        <label for="author_name">Artist</label>
-                        <input type="text" name="artist" class="form-control" placeholder="Enter artist name"  value="<%= content.artist %>" required>
-                        <label for="author_name">Country</label>
-                        <input type="text" name="country" class="form-control" placeholder="Enter country name"  value="<%= content.country %>" required>
-                        <label for="author_name">Label</label>
-                        <input type="text" name="label" class="form-control" placeholder="Enter label"  value="<%= content.label %>" required>
-                        <br>
+                        <input type="text" name="title" class="form-control" placeholder="Enter movie title:"  value="<%= content.title %>" required>
                         <label for="author_name">Year</label>
-                        <input type="text" name="year" class="form-control" placeholder="Enter Year"  value="<%= content.year %>" required>
+                        <input type="text" name="year" class="form-control" placeholder="Enter movie year"  value="<%= content.year %>" required>
+                        <label for="author_name">Genre</label>
+                        <input type="text" name="genres" class="form-control" placeholder="Enter movie genres"  value="<%= content.genres %>" required>
+                        <label for="author_name">Director</label>
+                        <input type="text" name="director" class="form-control" placeholder="Enter movie director"  value="<%= content.director %>" required>
                         <br>
+                        
                         <input type="submit" value="UPDATE" class="btn btn-success">
                     </div>
                 </form>

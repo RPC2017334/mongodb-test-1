@@ -44,10 +44,76 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
   
     });
 });
+
+// add movie
+
+  app.post("/add", csrfProtection, (request, response) => {
+    const item = request.body;
+    dbCollection.insertOne(item, (error, result) => { // callback of insertOne
+        if (error) throw error;
+        // return updated list
+        dbCollection.find().toArray((_error, _result) => { // callback of find
+            if (_error) throw _error;
+            
+        });
+    });
+
+      response.redirect('/');
+
 });
-app.get('/', function(req, res) {
+app.get('/update/:id', csrfProtection,(req, res) => {
+  const edit_postId = req.params.id;
+  console.log(req.params.id);
+  // FIND POST BY ID
+  var content = {};
+  var urlpath = url.parse(req.url,true).query;
+
  
-res.render('index');
- 
+    
+     dbCollection.findOne({ _id: new ObjectId(edit_postId) }, (error, result) => {
+        if (error) throw error;
+        // return item
+       
+        
+          res.render('edit',{ csrfToken: req.csrfToken(),content : result});
+
+    }); 
+    
+  console.log(content);
   
+});
+
+app.post('/update/:id', csrfProtection, (req, res) => {
+   const itemId = req.params.id;
+    const item = req.body;
+    console.log("Editing item: ", itemId, " to be ", item);
+
+    dbCollection.updateOne({  _id: new ObjectId(itemId)  }, { $set: item }, (error, result) => {
+        if (error) throw error;
+        // send back entire updated list, to make sure frontend data is up-to-date
+        dbCollection.find().toArray(function(_error, _result) {
+            if (_error) throw _error;
+            res.redirect('/');
+        });
+    });
+ 
+
+  
+});
+app.get('/delete/:id', (req, res) => {
+ const itemId = req.params.id;
+
+    dbCollection.deleteOne({ _id: new ObjectId(itemId) }, function(error, result) {
+        if (error) throw error;
+        // send back entire updated list after successful request
+        dbCollection.find().toArray(function(_error, _result) {
+            if (_error) throw _error;
+            res.redirect('/');
+        });
+    });
+});
+});
+app.get('/add', csrfProtection,(req, res) => {
+  var data = url.parse(req.url,true).query;
+  res.render('add',{ csrfToken: req.csrfToken() });
 });

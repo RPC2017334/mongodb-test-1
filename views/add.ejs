@@ -9,19 +9,17 @@
                 <form action="" method="POST">
                     <!-- form for add page -->
                     <div class="form-group"  >
-                        <h2>Add new CD Info:</h2>
+                        <h2>Add new Movie:</h2>
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                         <label for="post_title">Title</label>
-                        <input type="text" name="title" class="form-control" placeholder="Enter title:"  value="" required>
-                        <label for="author_name">Artist</label>
-                        <input type="text" name="artist" class="form-control" placeholder="Enter artist name" value="" required>
-                        <label for="author_name">Country</label>
-                        <input type="text" name="country" class="form-control" placeholder="Enter country name" value="" required>
-                        <label for="author_name">Label</label>
-                        <input type="text" name="label" class="form-control" placeholder="Enter label"  value="" required>
-                        <br>
+                        <input type="text" name="title" class="form-control" placeholder="Enter movie title:"  value="" required>
                         <label for="author_name">Year</label>
-                        <input type="text" name="year" class="form-control" placeholder="Enter year"  value="" required>
+                        <input type="text" name="year" class="form-control" placeholder="Enter movies year " value="" required>
+                        <label for="author_name">Genre</label>
+                        <input type="text" name="genres" class="form-control" placeholder="Enter movie genres" value="" required>
+                        <label for="author_name">Director</label>
+                        <input type="text" name="director" class="form-control" placeholder="Enter moview director"  value="" required>
+                        <br>
                         <br>
                         <input type="submit" value="Save" class="btn btn-success">
                     </div>
