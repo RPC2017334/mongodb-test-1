@@ -1,27 +1,53 @@
-var logger = require("morgan"),
-cors = require("cors"),
-http = require("http"),
-express = require("express"),
-bodyParser = require("body-parser"),
-mongoose = require('mongoose');
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const path = require('path');
+var url = require('url');
+var cookieParser = require('cookie-parser')    //for cookie parsing
+var csrf = require('csurf')    //csrf module
+var csrfProtection = csrf({ cookie: true })
 
-var app = express();
-var port = 3000;
-var userCtrl = require('./user-controller');
+const app = express();
+const port = process.env.PORT || 3000;
 
-app.use(logger('dev'));
+
+const db = require("./db");
+const dbName = "Movies_db";
+const collectionName = "movies";
+
+var mongodb = require('mongodb');
+var ObjectId = mongodb.ObjectID;
+
+app.use(cookieParser());
+// EJS view template engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+app.use(express.json());
 app.use(bodyParser.json());
-app.use(require('./routes'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(port, function(err){
     console.log("Listening on Port: " + port)
 });
 
-mongoose.connect('mongodb://localhost/test');
-mongoose.connection.on('error', (err) => { 
-    console.log('Mongodb Error: ', err); 
-    process.exit();
+db.initialize(dbName, collectionName, function(dbCollection) { // successCallback
+    // get all items
+    app.get('/', (req, res) => {
+    res.setHeader('Content-Type', 'text/html');
+    dbCollection.find().toArray(function(err, result) {
+        if (err) throw err;
+        console.log(JSON.stringify(result));
+        res.render('index', {contents:JSON.stringify(result)});
+       
+  
+    });
 });
-mongoose.connection.on('connected', () => { 
-    console.log('MongoDB is successfully connected');
+});
+app.get('/', function(req, res) {
+ 
+res.render('index');
+ 
+  
 });
