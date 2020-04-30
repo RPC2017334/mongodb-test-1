@@ -1,15 +1,48 @@
 <!DOCTYPE html>
 <html>
-    <title>CD Catalog</title>
+    <title>Movies</title>
     <head>
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
+        <style>
+        * {
+        box-sizing: border-box;
+        }
+
+        .column {
+        float: left;
+        width: 33.33%;
+        padding: 5px;
+        }
+
+        /* Clearfix (clear floats) */
+        .row::after {
+        content: "";
+        clear: both;
+        display: table;
+        }
+</style>
     </head>
     <body>
         <!-- navigation bar -->
-        <nav class="navbar navbar-expand bg-dark navbar-dark">
+        <nav class="navbar navbar-expand navbar-dark" style="background:#a90808">
             <label id="logo">IMDB TOP MOVIES</label>
          
+        </nav>
+         <nav class="navbar navbar-expand navbar-dark" style="background:#a90808">
+           <div class="row">
+            <div class="column">
+                <img src="img/a6.jpg" alt="Snow" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="img/a8.jpg" alt="Forest" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="img/a3.jpg" alt="Mountains" style="width:100%">
+            </div>
+            
+            </div>
+
         </nav>
         <!-- main content -->
         <div class="row">
@@ -17,7 +50,6 @@
             <div class="col-sm-12">
                 <div class="tab-content">
                     <br>
-                    <a href="/add?studioname=1"  style="margin-left: 18px; border-radius: 7px; background-color: #4CAF50;" type = 'button' id="addlink" class= "btn btn-info">Add new CD.</a><br>
                     <div id="home" class="container tab-pane active"><br>
                         <table class="table table-bordered" >
                             <tr class="thead-light">
